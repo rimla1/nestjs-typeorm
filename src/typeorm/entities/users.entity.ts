@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'users' })
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({type: "bigint"})
   id: number;
 
   @Column({unique: true})
@@ -11,9 +11,9 @@ export class User {
   @Column()
   password: string;
 
-  @Column()
+  @Column({nullable: true})
   authStrategy: string;
 
-  @Column({default: new Date()})
+  @Column()
   createdAt: Date;
 }

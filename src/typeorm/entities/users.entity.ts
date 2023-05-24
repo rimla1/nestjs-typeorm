@@ -11,7 +11,7 @@ export class User {
   @Column()
   password: string;
 
-  @Column({nullable: true})
+  @Column()
   authStrategy: string;
 
   @Column({default: new Date()})

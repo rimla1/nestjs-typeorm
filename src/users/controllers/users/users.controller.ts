@@ -12,6 +12,7 @@ export class UsersController {
     async getUsers(){
         try {
             const users = await this.usersService.getUsers()
+            console.log(users)
             return users
         } catch (e) {
             console.log(e)

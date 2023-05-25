@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dtos/createUser.dto';
+import { UpdateUserDto } from 'src/users/dtos/updateUser.dto';
 import { UsersService } from 'src/users/services/users/users.service';
 
 @Controller('users')
@@ -33,25 +34,16 @@ export class UsersController {
     }
 
     @Patch(":id")
-    async updateUser(@Body() userUpdateData, @Param("id") id: number){
+    async updateUser(@Body() userUpdateData: UpdateUserDto, @Param("id") id: number){
         try {
-            console.log(userUpdateData, typeof(userUpdateData))
-            console.log(id, typeof(id))
-            return "User update: call service"
+            await this.usersService.updateUser(id, userUpdateData)
+            return "User Updated!"
         } catch (e) {
             console.log(e)
         }
     }
 
-    @Delete(":id")
-    async deleteUser(@Param("id") id: number){
-        try {
-            console.log(id)
-            return "user deleted: call service"
-        } catch (e) {
-            console.log(e)
-        }
-    }
+
 
 
 }

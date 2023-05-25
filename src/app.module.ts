@@ -4,6 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { User } from './typeorm/entities/users.entity';
 import { UsersModule } from './users/users.module';
+import { ProfilesModule } from './profiles/profiles.module';
+import { Profile } from './typeorm/entities/profiles.entity';
 
 
 
@@ -15,9 +17,9 @@ import { UsersModule } from './users/users.module';
     username: 'almirmuminovic', 
     password: 'pass123', 
     database: 'typeorm', 
-    entities: [User],
+    entities: [User, Profile],
     synchronize: true, 
-  }), UsersModule, ],
+  }), UsersModule, ProfilesModule, ],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -14,7 +14,6 @@ export class UsersController {
     async getUsers(){
         try {
             const users = await this.usersService.getUsers()
-            console.log(users)
             return users
         } catch (e) {
             console.log(e)
@@ -25,7 +24,6 @@ export class UsersController {
     @Post()
     async createUser(@Body() userData: CreateUserDto){
         try {
-            console.log(userData)
             const user = await this.usersService.createUser(userData)
             return user
         } catch (e) {
@@ -34,7 +32,7 @@ export class UsersController {
     }
 
     @Patch(":id")
-    async updateUser(@Body() userUpdateData: UpdateUserDto, @Param("id") id: number){
+    async updateUser(@Body() userUpdateData: UpdateUserDto, @Param("id", ParseIntPipe) id: number){
         try {
             await this.usersService.updateUser(id, userUpdateData)
             return "User Updated!"
@@ -43,7 +41,15 @@ export class UsersController {
         }
     }
 
-
+    @Delete(":id")
+    async deleteUser(@Param("id", ParseIntPipe) id: number){
+        try {
+            await this.usersService.deleteUser(id)
+            return "User deleted!"
+        } catch (e) {
+            console.log(e)
+        }
+    }
 
 
 }

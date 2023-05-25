@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { CreateProfileDto } from 'src/profiles/dtos/createProfile.dto';
 import { ProfilesService } from 'src/profiles/services/profiles/profiles.service';
 
@@ -15,7 +15,7 @@ export class ProfilesController {
         return profiles
     }
 
-    @Post()
+    @Post(":id")
     async createProfile(@Body() profileData: CreateProfileDto){
         const profile = await this.profilesService.createProfile(profileData)
         return profile
